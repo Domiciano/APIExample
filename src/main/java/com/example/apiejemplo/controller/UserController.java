@@ -51,5 +51,13 @@ public class UserController {
 
     }
 
+    @DeleteMapping("user/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") long id){
+       userRepository.deleteById(id);
+       return ResponseEntity.status(200).body(
+               new GenericMessage("Usuario Eliminado")
+       );
+    }
+
 
 }
