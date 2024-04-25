@@ -59,5 +59,16 @@ public class UserController {
        );
     }
 
+    @PostMapping("login")
+    public ResponseEntity<?> login(@RequestBody User user){
+        var result = userRepository.getUserByEmailAndPassword(
+                user.getEmail(),
+                user.getPassword()
+        );
+        return result.isPresent() ?
+                ResponseEntity.status(200).body(result.get()) :
+                ResponseEntity.status(403).body(new GenericMessage("No admitido"));
+    }
+
 
 }
